@@ -1,0 +1,25 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7fafc;
+    margin: 0;
+    padding: 0;
+  }
+  
+  button:active {
+    transform: scale(0.98);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  /* Input Focus Effects */
+  input:focus {
+    border-color: #4c51bf;
+    box-shadow: 0 0 10px rgba(76, 81, 191, 0.3);
+  }
+  
+  /* Hover Effect for Links */
+  p:hover {
+    color: #d53f8c;
+    text-decoration: underline;
+  }
+  

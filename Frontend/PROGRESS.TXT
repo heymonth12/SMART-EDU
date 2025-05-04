@@ -1,0 +1,2 @@
+change database info from backend/model/index.js to work on any system 
+then create tables using the schema provided in all files of backend/model/
