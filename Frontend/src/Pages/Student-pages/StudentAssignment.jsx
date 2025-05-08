@@ -33,9 +33,10 @@ const StudentAssignment = () => {
     getDetails(); 
     getAssigment();
   }, []);
-console.log( "assignemnt",assignments[0].campus , assignments[0].semester, assignments[0].section)
-console.log("user info ",profile[0] ?. campus , profile[0] ?. semester , profile[0] ?. section)
 
+  console.log(assignments);
+  console.log(profile);
+  
 // if profile[0] ?. campus , semester , section == assignment[1 to n ]. campus , semester , section  then show else no need 
 
   return (
@@ -62,20 +63,30 @@ console.log("user info ",profile[0] ?. campus , profile[0] ?. semester , profile
         </thead>
         <tbody>
         {assignments
-  .filter(
-    (assignment) =>
-      profile[0]?.campus?.toLowerCase() === assignment.campus?.toLowerCase() &&
-      profile[0]?.semester?.toString() === assignment.semester?.toString() &&
-      profile[0]?.section?.toLowerCase() === assignment.section?.toLowerCase()
-  )
+  .filter((assignment) => {
+    if (!profile[0]) return false;
+
+    const profileCampus = profile[0].campus?.trim().toLowerCase();
+    const assignmentCampus = assignment.campus?.trim().toLowerCase();
+
+    const profileSemester = profile[0].semester?.toString();
+    const assignmentSemester = assignment.semester?.toString();
+
+    const profileSection = profile[0].section?.trim().toLowerCase();
+    const assignmentSection = assignment.section?.trim().toLowerCase();
+
+    return (
+      profileCampus === assignmentCampus &&
+      profileSemester === assignmentSemester &&
+      profileSection === assignmentSection
+    );
+  })
   .map((assignment) => (
     <tr key={assignment.id}>
       <td className="p-3 border">{assignment.id}</td>
       <td className="p-3 border">{assignment.title}</td>
       <td className="p-3 border">{assignment.subject}</td>
-      <td className="p-3 border">
-        {assignment.campus} - {assignment.section}
-      </td>
+      <td className="p-3 border">{profile[0]?.course} , SECTION - '{assignment.section}'</td>
       <td className="p-3 border">{assignment.postedBy}</td>
       <td className="p-3 border">
         {new Date(assignment.deadline).toLocaleString()}
@@ -83,6 +94,7 @@ console.log("user info ",profile[0] ?. campus , profile[0] ?. semester , profile
       <td className="p-3 border">{assignment.description}</td>
     </tr>
   ))}
+
 
 </tbody>
 

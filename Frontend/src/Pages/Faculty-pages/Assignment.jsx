@@ -12,7 +12,9 @@ const Assignment = () => {
     description: "",
     deadline: "",
     subject: "",
-    class: "",
+    campus: "",
+    semester: "",
+    section: "",
   });
 
   const getToken = () => localStorage.getItem("token");
@@ -55,11 +57,13 @@ const Assignment = () => {
       }
 
       setFormData({
-        title: "", 
+        title: "",
         description: "",
         deadline: "",
         subject: "",
-        class: "",
+        campus: "",
+        semester: "",
+        section: "",
       });
       setEditingId(null);
       setShowForm(false);
@@ -70,7 +74,15 @@ const Assignment = () => {
   };
 
   const handleEdit = (entry) => {
-    setFormData(entry);
+    setFormData({
+      title: entry.title,
+      description: entry.description,
+      deadline: entry.deadline,
+      subject: entry.subject,
+      campus: entry.campus,
+      semester: entry.semester,
+      section: entry.section,
+    });
     setEditingId(entry.id);
     setShowForm(true);
     setShowTable(false);
@@ -93,7 +105,9 @@ const Assignment = () => {
 
   return (
     <div className="p-8 bg-gray-50 min-h-screen">
-      <h2 className="text-4xl font-bold text-center mb-8 text-gray-800">Assignment Management</h2>
+      <h2 className="text-4xl font-bold text-center mb-8 text-gray-800">
+        Assignment Management
+      </h2>
 
       <div className="flex justify-center gap-8 mb-8">
         <button
@@ -102,11 +116,13 @@ const Assignment = () => {
             setShowTable(false);
             setEditingId(null);
             setFormData({
-              title: "", 
+              title: "",
               description: "",
               deadline: "",
               subject: "",
-              class: "",
+              campus: "",
+              semester: "",
+              section: "",
             });
           }}
           className="px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transition-all"
@@ -125,10 +141,15 @@ const Assignment = () => {
       </div>
 
       {showForm ? (
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto"
+        >
           <div className="grid grid-cols-2 gap-6 mb-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Assignment Title:</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Assignment Title:
+              </label>
               <input
                 name="title"
                 value={formData.title}
@@ -139,7 +160,9 @@ const Assignment = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Due Date:</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Due Date:
+              </label>
               <input
                 name="deadline"
                 value={formData.deadline}
@@ -150,7 +173,9 @@ const Assignment = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Subject:</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Subject:
+              </label>
               <input
                 name="subject"
                 value={formData.subject}
@@ -159,9 +184,50 @@ const Assignment = () => {
                 required
                 className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-            </div>  
-              <div className="col-span-2">
-              <label className="block text-sm font-medium text-gray-700">Description:</label>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Campus:
+              </label>
+              <input
+                name="campus"
+                value={formData.campus}
+                onChange={handleChange}
+                type="text"
+                required
+                className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Semester:
+              </label>
+              <input
+                name="semester"
+                value={formData.semester}
+                onChange={handleChange}
+                type="text"
+                required
+                className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Section:
+              </label>
+              <input
+                name="section"
+                value={formData.section}
+                onChange={handleChange}
+                type="text"
+                required
+                className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div className="col-span-2">
+              <label className="block text-sm font-medium text-gray-700">
+                Description:
+              </label>
               <textarea
                 name="description"
                 value={formData.description}
@@ -186,6 +252,9 @@ const Assignment = () => {
               <th className="p-3 text-left border">ID</th>
               <th className="p-3 text-left border">Title</th>
               <th className="p-3 text-left border">Subject</th>
+              <th className="p-3 text-left border">Campus</th>
+              <th className="p-3 text-left border">Semester</th>
+              <th className="p-3 text-left border">Section</th>
               <th className="p-3 text-left border">Description</th>
               <th className="p-3 text-left border">Due Date</th>
               <th className="p-3 text-left border">Actions</th>
@@ -197,6 +266,9 @@ const Assignment = () => {
                 <td className="p-3 border">{entry.id}</td>
                 <td className="p-3 border">{entry.title}</td>
                 <td className="p-3 border">{entry.subject}</td>
+                <td className="p-3 border">{entry.campus}</td>
+                <td className="p-3 border">{entry.semester}</td>
+                <td className="p-3 border">{entry.section}</td>
                 <td className="p-3 border">{entry.description}</td>
                 <td className="p-3 border">{entry.deadline}</td>
                 <td className="p-3 border flex gap-2">

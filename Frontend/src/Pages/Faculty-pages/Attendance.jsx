@@ -30,7 +30,7 @@ const Attendance = () => {
         const res = await axios.get("http://localhost:5000/faculty/find", {
           headers: { Authorization: `Bearer ${getToken()}` },
         });
-
+        
         if (res.data?.data?.campus) {
           setFacultyCampus(res.data.data.campus);
           setOptions((prev) => ({
@@ -57,7 +57,7 @@ const Attendance = () => {
           { where: { name: facultyCampus } },
           { headers: { Authorization: `Bearer ${getToken()}` } }
         );
-
+          console.log(facultyCampus)
         if (res.data[0]?.course) {
           setOptions((prev) => ({
             ...prev,

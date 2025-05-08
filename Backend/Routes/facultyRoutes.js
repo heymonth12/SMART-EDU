@@ -26,7 +26,7 @@ router.get('/get', async (req, res) => {
 router.get('/find', async (req, res) => {
     try {
         const mail = req.user.mail; // Extract email from req.user
-
+        console.log(mail)
         if (!mail) {
             return res.status(400).json({ status: 'error', message: 'Email not provided' });
         }
